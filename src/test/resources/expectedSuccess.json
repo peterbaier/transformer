@@ -1,0 +1,57 @@
+[
+  {
+    "timestamp": 1554410512,
+    "balanceChanges": [
+      {
+        "address": "0xcf0c6e6c77a3de62e556ed7a7385618814fab8f0",
+        "usdBalanceChange": -0.35322725344873973
+      },
+      {
+        "address": "0x4df1e42d4496cea4e90d24a3e66e824f114abbfb",
+        "usdBalanceChange": 0.35322725344873973
+      }
+    ]
+  },
+  {
+    "timestamp": 1554413433,
+    "balanceChanges": [
+      {
+        "address": "0xcf0c6e6c77a3de62e556ed7a7385618814fab8f0",
+        "usdBalanceChange": 0.09208314261909266
+      },
+      {
+        "address": "0x4df1e42d4496cea4e90d24a3e66e824f114abbfb",
+        "usdBalanceChange": 0.3861471646549353
+      },
+      {
+        "address": "0xf2bd58c97232639aa2bc18b034a7bd0f50fd0eb9",
+        "usdBalanceChange": 0.6146560840092248
+      },
+      {
+        "address": "0x02ea7c8f61f74e523e7fbaaa3961035adddd954a",
+        "usdBalanceChange": -1.0928863912832527
+      }
+    ]
+  },
+  {
+    "timestamp": 1554416220,
+    "balanceChanges": [
+      {
+        "address": "0x6887d050357a1f466637cac4f8571d86ffbd9372",
+        "usdBalanceChange": -0.8200820305040113
+      },
+      {
+        "address": "0x4df1e42d4496cea4e90d24a3e66e824f114abbfb",
+        "usdBalanceChange": -0.48379000389387167
+      },
+      {
+        "address": "0x02ea7c8f61f74e523e7fbaaa3961035adddd954a",
+        "usdBalanceChange": 0.48379000389387167
+      },
+      {
+        "address": "0xf2bd58c97232639aa2bc18b034a7bd0f50fd0eb9",
+        "usdBalanceChange": 0.8200820305040113
+      }
+    ]
+  }
+]
