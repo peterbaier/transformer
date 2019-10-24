@@ -1,6 +1,6 @@
-package co.elliptic.baier.transformer.utils;
+package tech.baier.transformer.utils;
 
-import co.elliptic.baier.transformer.models.AggregateResponse;
+import tech.baier.transformer.models.AggregateResponse;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

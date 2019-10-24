@@ -1,4 +1,4 @@
-package co.elliptic.baier.transformer.models;
+package tech.baier.transformer.models;
 
 import lombok.Builder;
 import lombok.Data;

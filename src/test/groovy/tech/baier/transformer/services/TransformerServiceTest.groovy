@@ -1,12 +1,8 @@
-package co.elliptic.baier.transformer.services
+package tech.baier.transformer.services
 
-import org.skyscreamer.jsonassert.JSONAssert
-import org.skyscreamer.jsonassert.JSONCompareMode
+
 import spock.lang.Specification
 import spock.lang.Unroll
-
-import java.nio.file.Files
-import java.nio.file.Paths
 
 class TransformerServiceTest extends Specification {
 

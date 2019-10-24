@@ -1,4 +1,4 @@
-package co.elliptic.baier.transformer.enums;
+package tech.baier.transformer.enums;
 
 public enum LineType {
     tx(5),

@@ -1,11 +1,13 @@
-package co.elliptic.baier.transformer.services;
+package tech.baier.transformer.services;
 
-import co.elliptic.baier.transformer.enums.LineType;
-import co.elliptic.baier.transformer.models.AggregateResponse;
-import co.elliptic.baier.transformer.models.ContextData;
+import tech.baier.transformer.enums.LineType;
+import tech.baier.transformer.models.AggregateResponse;
+import tech.baier.transformer.models.ContextData;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import tech.baier.transformer.utils.BlockChainProcessor;
+import tech.baier.transformer.utils.ResultFileWriter;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,9 +16,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
-
-import static co.elliptic.baier.transformer.utils.BlockChainProcessor.*;
-import static co.elliptic.baier.transformer.utils.ResultFileWriter.*;
 
 @Slf4j
 @Service
@@ -28,7 +27,7 @@ public class TransformerService {
 
     private static final BiFunction<ContextData, String[], ContextData> processTransaction = (context, lines) ->
             context.toBuilder()
-                    .balanceChanges(addNewTransactions(context.getBalanceChanges(), lines))
+                    .balanceChanges(BlockChainProcessor.addNewTransactions(context.getBalanceChanges(), lines))
                     .build();
 
     private static final BiFunction<ContextData, String[], ContextData> processBlock = (context, lines) ->
@@ -37,9 +36,9 @@ public class TransformerService {
                     .build();
 
     private static final BiFunction<ContextData, String[], ContextData> processExchange = (context, lines) -> {
-        writeBlockToFile(AggregateResponse.builder()
+        ResultFileWriter.writeBlockToFile(AggregateResponse.builder()
                 .timestamp(context.getTimestamp())
-                .balanceChanges(exchangeToUSD(context.getBalanceChanges(), lines[EXCHANGE_RATE]))
+                .balanceChanges(BlockChainProcessor.exchangeToUSD(context.getBalanceChanges(), lines[EXCHANGE_RATE]))
                 .build(), resultJson);
 
         return ContextData.builder().balanceChanges(new HashMap<>()).build();
@@ -61,7 +60,7 @@ public class TransformerService {
         }
 
         log.info("Start processing...");
-        resultJson = writeStartOfFile(StringUtils.substringAfterLast(filePath, "/").replace(".csv", ".json"));
+        resultJson = ResultFileWriter.writeStartOfFile(StringUtils.substringAfterLast(filePath, "/").replace(".csv", ".json"));
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             ContextData context = ContextData.builder().balanceChanges(new HashMap<>()).build();
@@ -69,14 +68,14 @@ public class TransformerService {
             while (br.ready()) {
                 String line = br.readLine();
                 try {
-                    LineType functionKey = getKey(line);
-                    context = functionsByKey.get(functionKey).apply(context, getLineData(line, functionKey));
+                    LineType functionKey = BlockChainProcessor.getKey(line);
+                    context = functionsByKey.get(functionKey).apply(context, BlockChainProcessor.getLineData(line, functionKey));
                 } catch (IllegalArgumentException e) {
                     log.error(e.getMessage());
                 }
             }
 
-            writeEndOfFile(resultJson);
+            ResultFileWriter.writeEndOfFile(resultJson);
         } catch (IOException e) {
             log.error("Could not find file at path:" + filePath);
         }

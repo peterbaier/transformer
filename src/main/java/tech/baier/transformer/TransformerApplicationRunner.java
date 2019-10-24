@@ -1,6 +1,6 @@
-package co.elliptic.baier.transformer;
+package tech.baier.transformer;
 
-import co.elliptic.baier.transformer.services.TransformerService;
+import tech.baier.transformer.services.TransformerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
